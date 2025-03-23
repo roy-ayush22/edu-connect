@@ -1,11 +1,21 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './pages.css'; // Add this import to use shared page styles
 
-const SignIn = () => {
+const SignIn = ({ isLoggedIn }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    fullName: '', // Adding a default full name for demo purposes
   });
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/dashboard');
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,78 +29,87 @@ const SignIn = () => {
     e.preventDefault();
     // Firebase integration will go here later
     console.log("Sign in data:", formData);
-    // For now, just redirect to dashboard
-    // In a real app, this would check credentials before redirecting
+    
+    // Store full name and email in session storage
+    sessionStorage.setItem('userName', formData.fullName);
+    sessionStorage.setItem('userEmail', formData.email);
+    
+    // Redirect to dashboard
     window.location.href = '/dashboard';
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 space-y-6">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-blue-600">EduConnect</h1>
-          <p className="text-gray-600 mt-2">Sign in to your account</p>
-        </div>
+    <div className="auth-container">
+      <div className="auth-form-wrapper">
+        <h2 className="auth-title">EduConnect</h2>
+        <p className="auth-subtitle">Sign in to your account</p>
         
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              className="form-input"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
+              id="email"
               name="email"
+              className="form-input"
               value={formData.email}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
             <input
               type="password"
+              id="password"
               name="password"
+              className="form-input"
               value={formData.password}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
+          <div className="form-options">
+            <div className="remember-me">
               <input
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="remember-me">
                 Remember me
               </label>
             </div>
 
-            <div className="text-sm">
-              <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
-                Forgot your password?
-              </a>
-            </div>
+            <a href="#" className="forgot-password">
+              Forgot your password?
+            </a>
           </div>
           
-          <div>
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              Sign in
-            </button>
-          </div>
+          <button type="submit" className="auth-button">
+            Sign in
+          </button>
         </form>
         
-        <div className="text-center text-sm">
-          <p className="text-gray-600">
+        <div className="auth-alternative">
+          <p>
             Don't have an account?{' '}
-            <Link to="/signup" className="font-medium text-blue-600 hover:text-blue-500">
+            <Link to="/signup" className="auth-link">
               Sign up
             </Link>
           </p>

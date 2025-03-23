@@ -6,12 +6,25 @@
   background-color: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .header-container {
   max-width: 80rem;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+/* Add dashboard specific header styles */
+.dashboard-layout .header-nav {
+  width: calc(100% - 250px);
+  margin-left: 250px;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+.dashboard-layout.sidebar-collapsed .header-nav {
+  width: calc(100% - 64px);
+  margin-left: 64px;
 }
 
 .header-content {
@@ -90,4 +103,12 @@
 
 .header-signup-link:hover {
   background-color: #2563eb;
+}
+
+/* Responsive adjustments for dashboard header */
+@media (max-width: 768px) {
+  .dashboard-layout .header-nav {
+    width: calc(100% - 64px);
+    margin-left: 64px;
+  }
 } 

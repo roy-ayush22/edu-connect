@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './HomePage.css';
 import { FaGraduationCap, FaUsers, FaLaptop, FaChalkboardTeacher } from 'react-icons/fa';
 
-const HomePage = () => {
+const HomePage = ({ isLoggedIn }) => {
   return (
     <div className="home-container">
       {/* Hero Section */}
@@ -16,8 +16,8 @@ const HomePage = () => {
               Connect with volunteer educators, access personalized tutoring, and build essential digital skills.
             </p>
             <div className="hero-actions">
-              <Link to="/signup" className="sign-up-link">
-                Get Started for Free
+              <Link to={isLoggedIn ? "/dashboard" : "/signup"} className="sign-up-link">
+                {isLoggedIn ? "Go to Dashboard" : "Get Started for Free"}
               </Link>
             </div>
           </div>
@@ -144,9 +144,15 @@ const HomePage = () => {
           <p className="cta-subtitle">
             Join thousands of learners who are building their digital skills with EduConnect.
           </p>
-          <Link to="/signup" className="cta-button">
-            Sign Up Now
-          </Link>
+          {isLoggedIn ? (
+            <Link to="/dashboard" className="cta-button">
+              Go to Dashboard
+            </Link>
+          ) : (
+            <Link to="/signup" className="cta-button">
+              Sign Up Now
+            </Link>
+          )}
         </div>
       </div>
     </div>
