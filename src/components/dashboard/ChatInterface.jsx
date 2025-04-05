@@ -17,7 +17,6 @@ const ChatInterface = ({ user }) => {
     
     if (!message.trim()) return;
     
-    // Add user message
     const userMessage = {
       id: messages.length + 1,
       sender: 'user',
@@ -28,7 +27,6 @@ const ChatInterface = ({ user }) => {
     setMessages(prev => [...prev, userMessage]);
     setMessage('');
     
-    // Simulate AI response (in a real app, this would call an AI API)
     setTimeout(() => {
       const aiResponses = [
         "That's a great question! I'd recommend starting with our beginner tutorials on digital literacy.",

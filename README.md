@@ -1,32 +1,37 @@
 # EduConnect
 
-EduConnect is a platform designed to connect educational resources with students and educators. This application provides a centralized hub for learning materials, volunteer opportunities, and community support.
+EduConnect is a web application designed to bridge the digital divide by connecting volunteer educators with learners in marginalized communities. The platform provides free access to personalized educational resources, mentorship, and essential digital literacy skills training.
+
+## Mission
+
+Our mission is to empower individuals in underserved areas by providing accessible and quality digital education, fostering a supportive learning community, and opening doors to future opportunities.
 
 ## Features
 
-- User authentication (sign up, sign in)
-- Resource library
-- Volunteer opportunities
-- Donation system
-- User dashboard
+-   **User Authentication:** Secure sign-up and sign-in functionality for learners and educators.
+-   **Personalized Dashboard:** Tailored view for users showing progress, upcoming lessons, recommended mentors, and resources.
+-   **Resource Library:** Access to curated learning materials like courses, eBooks, and video series.
+-   **Mentor Connection:** Platform for learners to find and connect with volunteer educators for tutoring and guidance.
+-   **AI Learning Assistant:** Integrated chat interface providing 24/7 support and answering learner questions.
+-   **Volunteer Opportunities:** Section for educators to sign up and offer their expertise.
+-   **(Future) Donation System:** Functionality to support the platform's mission financially.
 
 ## Tech Stack
 
-### Frontend
-- React.js
-- React Router for navigation
-- CSS for styling
-- React Icons
+**Frontend:**
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB with Mongoose
-- JWT for authentication
-- Zod for validation
+-   React.js (Vite)
+-   React Router
+-   Tailwind CSS
+-   React Icons
 
-## Getting Started
+**Backend:**
 
-### Prerequisites
-- Node.js
-- MongoDB
+-   Node.js
+-   Express.js
+-   MongoDB (with Mongoose)
+-   JSON Web Tokens (JWT) for authentication
+-   bcryptjs for password hashing
+-   Zod for input validation
+-   dotenv for environment variable management
+-   cors for enabling Cross-Origin Resource Sharing

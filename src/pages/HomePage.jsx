@@ -12,7 +12,6 @@ import {
 const HomePage = ({ isLoggedIn }) => {
   return (
     <div className="home-container">
-      {/* Hero Section */}
       <div className="hero-section">
         <div className="hero-content">
           <div className="hero-text-container">
@@ -62,7 +61,6 @@ const HomePage = ({ isLoggedIn }) => {
         </div>
       </div>
 
-      {/* Features Section */}
       <div className="features-section">
         <div className="section-header">
           <div className="section-tag">How It Works</div>
@@ -122,7 +120,6 @@ const HomePage = ({ isLoggedIn }) => {
         </div>
       </div>
 
-      {/* Testimonials Section */}
       <div className="testimonials-section">
         <div className="testimonials-container">
           <div className="section-header">
@@ -136,7 +133,6 @@ const HomePage = ({ isLoggedIn }) => {
         </div>
       </div>
 
-      {/* CTA Section */}
       <div className="cta-section">
         <div className="cta-container">
           <div className="cta-content">

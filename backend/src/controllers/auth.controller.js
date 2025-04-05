@@ -5,7 +5,6 @@ const { validateSignup, validateSignin } = require('../utils/validation');
 
 const signup = async (req, res) => {
   try {
-    // Validate input
     const validation = validateSignup(req.body);
     if (!validation.success) {
       return res.status(400).json({ 
@@ -16,7 +15,6 @@ const signup = async (req, res) => {
 
     const { username, email, password } = req.body;
 
-    // Check if user already exists
     const existingUser = await User.findOne({ 
       $or: [{ email }, { username }] 
     });
@@ -27,11 +25,9 @@ const signup = async (req, res) => {
       });
     }
 
-    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create new user
     const user = new User({
       username,
       email,
@@ -40,7 +36,6 @@ const signup = async (req, res) => {
 
     await user.save();
 
-    // Generate JWT token
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
@@ -63,7 +58,6 @@ const signup = async (req, res) => {
 
 const signin = async (req, res) => {
   try {
-    // Validate input
     const validation = validateSignin(req.body);
     if (!validation.success) {
       return res.status(400).json({ 
@@ -74,19 +68,16 @@ const signin = async (req, res) => {
 
     const { email, password } = req.body;
 
-    // Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Verify password
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Generate JWT token
     const token = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,

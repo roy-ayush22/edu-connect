@@ -6,18 +6,15 @@ const Dashboard = ({ userName = 'User', userEmail = 'user@example.com', onSideba
   const [activeTab, setActiveTab] = useState('overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   
-  // Toggle sidebar collapse state
   const toggleSidebar = () => {
     const newState = !sidebarCollapsed;
     setSidebarCollapsed(newState);
     
-    // Notify parent component about sidebar state change
     if (onSidebarToggle) {
       onSidebarToggle(newState);
     }
   };
   
-  // Use effect to handle responsive design
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768 && !sidebarCollapsed) {
@@ -28,22 +25,18 @@ const Dashboard = ({ userName = 'User', userEmail = 'user@example.com', onSideba
       }
     };
     
-    // Initial check
     handleResize();
     
-    // Add event listener
     window.addEventListener('resize', handleResize);
     
-    // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [sidebarCollapsed, onSidebarToggle]);
   
-  // Mock user data - in a real app this would come from authentication/API
   const user = {
-    name: userName, // Use the userName passed from props
-    email: userEmail, // Use the userEmail passed from props
+    name: userName,
+    email: userEmail,
     role: 'learner',
     progress: 65,
     upcomingLessons: [
@@ -52,32 +45,26 @@ const Dashboard = ({ userName = 'User', userEmail = 'user@example.com', onSideba
     ]
   };
   
-  // Mock mentors data - in a real app this would come from an API
   const mentors = [
     { id: 1, name: 'Dr. Sarah Johnson', expertise: 'Computer Science', rating: 4.9, available: true },
     { id: 2, name: 'Prof. Michael Chen', expertise: 'Digital Marketing', rating: 4.7, available: true },
     { id: 3, name: 'Amanda Williams', expertise: 'Web Development', rating: 4.8, available: false }
   ];
   
-  // Mock learning resources
   const resources = [
     { id: 1, title: 'Fundamentals of Computer Science', type: 'Course', source: 'Khan Academy' },
     { id: 2, title: 'Digital Literacy Basics', type: 'eBook', source: 'EduConnect Library' },
     { id: 3, title: 'Web Development Bootcamp', type: 'Video Series', source: 'YouTube' }
   ];
 
-  // Handle logout
   const handleLogout = () => {
-    // Clear stored user data
     sessionStorage.removeItem('userName');
     sessionStorage.removeItem('userEmail');
-    // Redirect to signin
     window.location.href = '/signin';
   };
 
   return (
     <div className="dashboard-container">
-      {/* Toggle button for mobile */}
       <button 
         className={`sidebar-toggle-btn ${sidebarCollapsed ? 'collapsed' : ''}`}
         onClick={toggleSidebar}
@@ -86,7 +73,6 @@ const Dashboard = ({ userName = 'User', userEmail = 'user@example.com', onSideba
         {sidebarCollapsed ? <FaBars /> : <FaTimes />}
       </button>
       
-      {/* Sidebar */}
       <div className={`dashboard-sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <div className="dashboard-logo">
           {!sidebarCollapsed && <h1>EduConnect</h1>}
@@ -158,14 +144,12 @@ const Dashboard = ({ userName = 'User', userEmail = 'user@example.com', onSideba
         </nav>
       </div>
 
-      {/* Main Content */}
       <div className={`dashboard-content ${sidebarCollapsed ? 'expanded' : ''}`}>
         <div className="dashboard-header">
           <h2>Welcome back, {user.name}</h2>
           <p>Your learning journey continues here</p>
         </div>
 
-        {/* Content based on active tab */}
         {activeTab === 'overview' && (
           <div className="dashboard-overview">
             <div className="info-card">

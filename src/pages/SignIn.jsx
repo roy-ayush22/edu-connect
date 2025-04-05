@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './pages.css'; // Add this import to use shared page styles
+import './pages.css';
 
 const SignIn = ({ isLoggedIn }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    fullName: '', // Adding a default full name for demo purposes
+    fullName: '',
   });
 
-  // Redirect if already logged in
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/dashboard');
@@ -27,14 +26,11 @@ const SignIn = ({ isLoggedIn }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Firebase integration will go here later
     console.log("Sign in data:", formData);
     
-    // Store full name and email in session storage
     sessionStorage.setItem('userName', formData.fullName);
     sessionStorage.setItem('userEmail', formData.email);
     
-    // Redirect to dashboard
     window.location.href = '/dashboard';
   };
 
