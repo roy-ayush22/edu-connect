@@ -1,3 +1,5 @@
+# working on a new and updated application
+
 # EduConnect
 
 EduConnect is a web application designed to bridge the digital divide by connecting volunteer educators with learners in marginalized communities. The platform provides free access to personalized educational resources, mentorship, and essential digital literacy skills training.
@@ -35,3 +37,6 @@ Our mission is to empower individuals in underserved areas by providing accessib
 -   Zod for input validation
 -   dotenv for environment variable management
 -   cors for enabling Cross-Origin Resource Sharing
+
+-   -----------------------------------------------------
+
